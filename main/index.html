@@ -21,8 +21,11 @@
       align-items: center;
       justify-content: center;
       gap: 15px;
+      transition: all 0.5s ease;
     }
-
+    #start.after{
+        opacity: 0;
+    }
     
     .regalo {
       width: 410px;
@@ -99,7 +102,7 @@
       background-color: rgb(160, 31, 160);
       color: white;
     }
-    
+
   </style>
 </head>
 
@@ -130,5 +133,23 @@
       <button>No, vete a la mierda</button>
     </div>
   </div>
+
+
+
+
+
+
+  
+  <script>
+    const btns = document.querySelectorAll('#btns button');
+    btns[0].addEventListener('click', () => {
+      const start = document.getElementById('start');
+      start.classList.add('after');
+    });
+    btns[1].addEventListener('click', () => {
+      alert('¡Qué mala persona! ¡Adiós!');
+    });
+
+  </script>
 </body>
 </html>
