@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regalo rubia</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      /*Cambiar el background general por uno bonito con animación, pensar cual*/
+    }
+    #folder{
+        width: 500px;
+        height: 250px;
+        background-color: #4b4b4b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        opacity: 0;
+        transition: opacity 1s ease;
+        cursor: pointer;
+    }
+    #folder.after{
+        opacity: 1;
+    }
+    #folderTriangle{
+        position: absolute;
+        top: 0;
+        width: 500px;
+        height: 100px;
+        background:
+            -webkit-radial-gradient(white 10%, transparent 15.1%),
+            -webkit-radial-gradient(white 7%, transparent 15.1%),
+            rgb(59, 163, 156);
+        background-position:0 0, 10px 10px;
+        background-size: 20px 20px;
+        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+    #folderTriangle.after{
+        opacity: 0;
+    }
+    #folderTriangleOpen{
+        width: 500px;
+        height: 100px;
+        background:
+            -webkit-radial-gradient(white 10%, transparent 15.1%),
+            -webkit-radial-gradient(white 7%, transparent 15.1%),
+            rgb(59, 163, 156);        background-position:0 0, 10px 10px;
+        background-size: 20px 20px;
+        clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+    #folderTriangleOpen.afterOpen{
+        opacity: 1;
+    }
+    #open{
+        color: white;
+        font-size: larger;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        opacity: 1;
+        transition: opacity 1s ease;
+    }
+    #open.after{
+        opacity: 0;
+    }
+    #text{
+        top: 0;
+        left: 0;
+        position: absolute;
+        color: white;
+        font-size: larger;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        opacity: 0;
+        transition: opacity 1s ease;
+        word-break: keep-all;
+        line-break: anywhere;
+    }
+    #text.after{
+        opacity: 1;
+    }
+  </style>
+</head>
+
+
+
+
+
+
+
+<body>
+    <div id="message">
+        <div id="folderTriangleOpen"></div>
+        <div id="folder" class="after">
+            <p id="text">Muchisimas felilcidades</p>
+            <div id="folderTriangle"></div>
+            <div id="open"><p>Clicame para abrirme</p></div>
+        </div>
+    </div>
+
+
+
+
+
+
+  
+  <script>
+    const folder = document.getElementById("folder");
+    const Triangles = [document.getElementById("folderTriangle"),document.getElementById("folderTriangleOpen")];
+    const control = false; //Si está abierto (true) o no (false)
+    const textFolder = document.getElementById("open"); 
+    const text = document.getElementById("text");
+    folder.addEventListener('click', () => {
+        if(getComputedStyle(folder).opacity == "1"){
+            if(control == false){
+                Triangles[0].classList.add("after");
+                Triangles[1].classList.add("afterOpen");
+                folder.style.cursor="auto";
+                textFolder.classList.add("after");
+                setTimeout(() => {
+                    text.classList.add("after");
+                }, 1000);
+            };
+        };
+    });
+  </script>
+</body>
+</html>
