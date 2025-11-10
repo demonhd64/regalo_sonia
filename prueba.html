@@ -13,7 +13,7 @@
       margin: 0;
       padding: 0;
       background-color: #f2f2f2;
-      /*Cambiar el background general por uno bonito con animación, pensar cual*/
+      overflow: hidden;
     }
 
     #folder{
@@ -80,7 +80,7 @@
     #open.after{
         opacity: 0;
     }
-    #text{
+    #folder_text{
         top: 0;
         left: 0;
         position: absolute;
@@ -97,13 +97,46 @@
         word-break: keep-all;
     }
 
-    #text.after{
+    #folder_text.after{
         opacity: 1;
+    }
+
+    /*Copos de nieve*/
+    #snow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* no bloquea clicks */
+      z-index: -1; /* detrás de todo */
+      overflow: hidden;   /* nada se sale del contenedor */
+    }
+
+    .snowflake {
+        z-index: -1;
+      position: absolute;
+      top: -10px;
+      color: lightblue;
+      font-size: 1em;
+      animation: fall linear infinite;
+      opacity: 1;
+    }
+    @keyframes fall {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0.3;
+        }
     }
   </style>
 </head>
 
 
+<div id="snow-container"></div>
 
 
 
@@ -113,7 +146,7 @@
     <div id="message">
         <div id="folderTriangleOpen"></div>
         <div id="folder" class="after">
-            <p id="text">Muchisimas felilcidades ¡Muchísimas felicidades en este día tan especial!<br>
+            <p id="folder_text">Muchisimas felilcidades ¡Muchísimas felicidades en este día tan especial!<br>
                         Que cada momento esté lleno de alegría, risas y sorpresas inolvidables. <br>
                         Que todos tus sueños y metas se cumplan, y que sigas creciendo y brillando como hasta ahora. <br>
                         Disfruta de cada instante, rodeado de las personas que más quieres, y recuerda siempre celebrar tus logros, grandes y pequeños. <br>
@@ -134,7 +167,7 @@
     const Triangles = [document.getElementById("folderTriangle"),document.getElementById("folderTriangleOpen")];
     const control = false; //Si está abierto (true) o no (false)
     const textFolder = document.getElementById("open"); 
-    const text = document.getElementById("text");
+    const text = document.getElementById("folder_text");
     folder.addEventListener('click', () => {
         if(getComputedStyle(folder).opacity == "1"){
             if(control == false){
@@ -148,6 +181,29 @@
             };
         };
     });
+    /*Copos de nieve*/
+    const snowCount = 250; // cantidad total deseada
+    let created = 0;
+    const snowContainer = document.getElementById("snow-container");
+
+    const createSnowflake = () => {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.textContent = "❄";
+      snowflake.style.left = Math.random() * 100 + "vw";
+      snowflake.style.fontSize = (Math.random() * 20 + 20) + "px";
+      snowflake.style.animationDuration = (Math.random() * 5 + 5) + "s";
+      snowflake.style.animationDelay = "-" + Math.random() * 5 + "s"; // empieza ya
+      snowContainer.appendChild(snowflake);
+    };
+
+
+    const snowInterval = setInterval(() => {
+      createSnowflake();
+      created++;
+      if (created >= snowCount) clearInterval(snowInterval);
+    }, 80); // crea un copo cada 80 ms aprox.
+
   </script>
 </body>
 </html>

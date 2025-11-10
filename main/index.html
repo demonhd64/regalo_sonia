@@ -13,9 +13,42 @@
       margin: 0;
       padding: 0;
       background-color: #f2f2f2;
+      overflow: hidden;
+    }
+    /*Copos de nieve*/
+    #snow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* no bloquea clicks */
+      z-index: -1; /* detrás de todo */
+      overflow: hidden;   /* nada se sale del contenedor */
+    }
+
+    .snowflake {
+        z-index: -1;
+      position: absolute;
+      top: -10px;
+      color: lightblue;
+      font-size: 1em;
+      animation: fall linear infinite;
+      opacity: 1;
+    }
+    @keyframes fall {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0.3;
+        }
     }
 
     #start {
+      position: absolute;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -28,8 +61,7 @@
     }
     
     .regalo {
-      width: 410px;
-      margin: 0 auto;
+      width: 400px; 
     }
     .caja, .tapa {
       background:
@@ -39,21 +71,17 @@
       background-position: 0 0, 25px 25px;
       background-size: 50px 50px;
       position: relative;
-      margin: 0 auto;
     }
     .caja {
-      width: 400px;
+      width: 100%;
       height: 250px;
     }
     .tapa {
-      width: 400px;
+      width: 100%;
       height: 70px;
       box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
       z-index: 1;
-      padding: 0 2px;
       background-color: #f80000;
-      top: 0;
-      left: 0;
     }
     .caja span, .tapa span {
       position: absolute;
@@ -72,7 +100,21 @@
       left: 170px;
     }
     .tapa span {
-      left: 172px;
+      left: 170px;
+    }
+    @media (max-width: 400px){
+      .regalo{
+        width: 350px;
+      }
+      .caja span:first-child {
+        top: 80px;
+      }
+      .caja span:last-child, .tapa span {
+        left: 150px;
+      }
+      .tapa span {
+        left: 150px;
+      }
     }
 
     #text {
@@ -103,10 +145,97 @@
       color: white;
     }
 
+    /*Estilos del texto despues del start*/
+      #folder{
+        width: 100%;
+        min-width: 500px;
+        height: 250px;
+        background-color: #4b4b4b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        opacity: 0;
+        transition: opacity 1s ease;
+    }
+    @media (max-width: 400px){
+        #folder{
+            min-width: 350px;
+        }
+    }
+    #folder.after{
+        opacity: 1;
+        cursor: pointer;
+    }
+    #folderTriangle{
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100px;
+        background:
+            -webkit-radial-gradient(white 10%, transparent 15.1%),
+            -webkit-radial-gradient(white 7%, transparent 15.1%),
+            rgb(59, 163, 156);
+        background-position:0 0, 10px 10px;
+        background-size: 20px 20px;
+        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+    #folderTriangle.after{
+        opacity: 0;
+    }
+    #folderTriangleOpen{
+        width: 100%;
+        height: 100px;
+        background:
+            -webkit-radial-gradient(white 10%, transparent 15.1%),
+            -webkit-radial-gradient(white 7%, transparent 15.1%),
+            rgb(59, 163, 156);        background-position:0 0, 10px 10px;
+        background-size: 20px 20px;
+        clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+    #folderTriangleOpen.afterOpen{
+        opacity: 1;
+    }
+    #open{
+        color: white;
+        font-size: clamp(0.5rem, 1rem, 1rem);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        opacity: 1;
+        transition: opacity 1s ease;
+    }
+    #open.after{
+        opacity: 0;
+    }
+    #folder_text{
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;      
+        height: 100%;         
+        display: flex;          
+        align-items: top center;  
+        justify-content: center;
+        color: white;
+        font-size: clamp(0.5rem, 1rem, 1rem);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        opacity: 0;
+        transition: opacity 1s ease;
+        word-break: keep-all;
+    }
+
+    #folder_text.after{
+        opacity: 1;
+    }
+
   </style>
 </head>
 
 
+<div id="snow-container"></div>
 
 
 
@@ -134,7 +263,18 @@
     </div>
   </div>
 
-
+  <div id="message">
+    <div id="folderTriangleOpen"></div>
+    <div id="folder">
+        <p id="folder_text">Muchisimas felilcidades ¡Muchísimas felicidades en este día tan especial!<br>
+                    Que cada momento esté lleno de alegría, risas y sorpresas inolvidables. <br>
+                    Que todos tus sueños y metas se cumplan, y que sigas creciendo y brillando como hasta ahora. <br>
+                    Disfruta de cada instante, rodeado de las personas que más quieres, y recuerda siempre celebrar tus logros, grandes y pequeños. <br>
+                    ¡Que la felicidad te acompañe hoy y siempre! </p>
+        <div id="folderTriangle"></div>
+        <div id="open"><p>Clicame para abrirme</p></div>
+    </div>
+  </div>
 
 
 
@@ -142,14 +282,53 @@
   
   <script>
     const btns = document.querySelectorAll('#btns button');
+    const folder = document.getElementById("folder");
     btns[0].addEventListener('click', () => {
       const start = document.getElementById('start');
       start.classList.add('after');
+      folder.classList.add('after');
     });
     btns[1].addEventListener('click', () => {
       alert('¡Qué mala persona! ¡Adiós!');
     });
+    /*Script regalo despes de start*/
+    const Triangles = [document.getElementById("folderTriangle"),document.getElementById("folderTriangleOpen")];
+    const control = false; //Si está abierto (true) o no (false)
+    const textFolder = document.getElementById("open"); 
+    const text = document.getElementById("folder_text");
+    folder.addEventListener('click', () => {
+        if(getComputedStyle(folder).opacity == "1"){
+            if(control == false){
+                Triangles[0].classList.add("after");
+                Triangles[1].classList.add("afterOpen");
+                folder.style.cursor="auto";
+                textFolder.classList.add("after");
+                setTimeout(() => {
+                    text.classList.add("after");
+                }, 1000);
+            };
+        };
+    });
+    /*Copos de nieve*/
+    const snowCount = 250; // cantidad total deseada
+    let created = 0;
+    const snowContainer = document.getElementById("snow-container");
 
+    const createSnowflake = () => {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.textContent = "❄";
+      snowflake.style.left = Math.random() * 100 + "vw";
+      snowflake.style.fontSize = (Math.random() * 20 + 20) + "px";
+      snowflake.style.animationDuration = (Math.random() * 5 + 5) + "s";
+      snowContainer.appendChild(snowflake);
+    };
+
+    const snowInterval = setInterval(() => {
+      createSnowflake();
+      created++;
+      if (created >= snowCount) clearInterval(snowInterval);
+    }, 80); // crea un copo cada 80 ms aprox.
   </script>
 </body>
 </html>
