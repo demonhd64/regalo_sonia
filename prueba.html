@@ -12,95 +12,9 @@
       height: 100vh;
       margin: 0;
       padding: 0;
-      background-color: #f2f2f2;
+      background-color: #c5f6fa;
       overflow: hidden;
     }
-
-    #folder{
-        width: 100%;
-        min-width: 500px;
-        height: 250px;
-        background-color: #4b4b4b;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        opacity: 0;
-        transition: opacity 1s ease;
-        cursor: pointer;
-    }
-    @media (max-width: 400px){
-        #folder{
-            min-width: 350px;
-        }
-    }
-    #folder.after{
-        opacity: 1;
-    }
-    #folderTriangle{
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 100px;
-        background:
-            -webkit-radial-gradient(white 10%, transparent 15.1%),
-            -webkit-radial-gradient(white 7%, transparent 15.1%),
-            rgb(59, 163, 156);
-        background-position:0 0, 10px 10px;
-        background-size: 20px 20px;
-        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
-        opacity: 1;
-        transition: opacity 0.5s ease;
-    }
-    #folderTriangle.after{
-        opacity: 0;
-    }
-    #folderTriangleOpen{
-        width: 100%;
-        height: 100px;
-        background:
-            -webkit-radial-gradient(white 10%, transparent 15.1%),
-            -webkit-radial-gradient(white 7%, transparent 15.1%),
-            rgb(59, 163, 156);        background-position:0 0, 10px 10px;
-        background-size: 20px 20px;
-        clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
-        opacity: 0;
-        transition: opacity 0.5s ease;
-    }
-    #folderTriangleOpen.afterOpen{
-        opacity: 1;
-    }
-    #open{
-        color: white;
-        font-size: clamp(0.5rem, 1rem, 1rem);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        opacity: 1;
-        transition: opacity 1s ease;
-    }
-    #open.after{
-        opacity: 0;
-    }
-    #folder_text{
-        top: 0;
-        left: 0;
-        position: absolute;
-        width: 100%;      
-        height: 100%;         
-        display: flex;          
-        align-items: top center;  
-        justify-content: center;
-        color: white;
-        font-size: clamp(0.5rem, 1rem, 1rem);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        opacity: 0;
-        transition: opacity 1s ease;
-        word-break: keep-all;
-    }
-
-    #folder_text.after{
-        opacity: 1;
-    }
-
     /*Copos de nieve*/
     #snow-container {
       position: fixed;
@@ -110,14 +24,13 @@
       height: 100%;
       pointer-events: none; /* no bloquea clicks */
       z-index: -1; /* detrás de todo */
-      overflow: hidden;   /* nada se sale del contenedor */
     }
 
     .snowflake {
         z-index: -1;
       position: absolute;
       top: -10px;
-      color: lightblue;
+      color: rgb(37, 200, 255);
       font-size: 1em;
       animation: fall linear infinite;
       opacity: 1;
@@ -132,55 +45,130 @@
           opacity: 0.3;
         }
     }
+    /* Carrusel */
+    #carrusel-container {
+      position: relative;
+      width: 600px;      /* ancho del carrusel */
+      height: auto;     /* alto del carrusel */
+      overflow: hidden;  /* oculta las demás imágenes */
+    }
+
+    #carrusel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      height: 100%;
+    }
+
+    .carrusel-item {
+      min-width: 100%;   /* ocupa todo el ancho del contenedor */
+      height: 100%;
+    }
+
+    .carrusel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* la imagen cubre el contenedor sin deformarse */
+      display: block;
+    }
+
+    /* Botones */
+    .carrusel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      border-radius: 5px;
+      z-index: 10;
+      user-select: none;
+    }
+
+    .carrusel-btn-prev {
+      left: 10px;
+    }
+
+    .carrusel-btn-next {
+      right: 10px;
+    }
+
+    .download{
+      top: 50px;
+      left: 20px;
+    }
+
+    .exit{
+      top: 50px;
+      right: 0;
+    }
+
   </style>
 </head>
-
-
+<body>
 <div id="snow-container"></div>
 
 
-
-
-
-<body>
-    <div id="message">
-        <div id="folderTriangleOpen"></div>
-        <div id="folder" class="after">
-            <p id="folder_text">Muchisimas felilcidades ¡Muchísimas felicidades en este día tan especial!<br>
-                        Que cada momento esté lleno de alegría, risas y sorpresas inolvidables. <br>
-                        Que todos tus sueños y metas se cumplan, y que sigas creciendo y brillando como hasta ahora. <br>
-                        Disfruta de cada instante, rodeado de las personas que más quieres, y recuerda siempre celebrar tus logros, grandes y pequeños. <br>
-                        ¡Que la felicidad te acompañe hoy y siempre! </p>
-            <div id="folderTriangle"></div>
-            <div id="open"><p>Clicame para abrirme</p></div>
-        </div>
+  <div id="carrusel-container">
+    <div id="carrusel">
+      <div class="carrusel-item"><img src="./main/img/2.png" alt="Foto 2"></div>
+      <div class="carrusel-item"><img src="./main/img/3.png" alt="Foto 3"></div>
+      <div class="carrusel-item"><img src="./main/img/5.jpg" alt="Foto 5"></div>
+      <div class="carrusel-item"><img src="./main/img/6.jpg" alt="Foto 6"></div>
+      <div class="carrusel-item"><img src="./main/img/7.jpg" alt="Foto 7"></div>
     </div>
-
-
+    <button class="carrusel-btn carrusel-btn-prev">←</button>
+    <button class="carrusel-btn carrusel-btn-next">→</button>
+    <button class="carrusel-btn download">↓</button>
+    <button class="carrusel-btn exit">Exit</button>
+  </div>
 
 
 
 
   
   <script>
-    const folder = document.getElementById("folder");
-    const Triangles = [document.getElementById("folderTriangle"),document.getElementById("folderTriangleOpen")];
-    const control = false; //Si está abierto (true) o no (false)
-    const textFolder = document.getElementById("open"); 
-    const text = document.getElementById("folder_text");
-    folder.addEventListener('click', () => {
-        if(getComputedStyle(folder).opacity == "1"){
-            if(control == false){
-                Triangles[0].classList.add("after");
-                Triangles[1].classList.add("afterOpen");
-                folder.style.cursor="auto";
-                textFolder.classList.add("after");
-                setTimeout(() => {
-                    text.classList.add("after");
-                }, 1000);
-            };
-        };
+      const carrusel = document.getElementById("carrusel");
+    const prevBtn = document.querySelector(".carrusel-btn-prev");
+    const nextBtn = document.querySelector(".carrusel-btn-next");
+    const totalItems = document.querySelectorAll(".carrusel-item").length;
+
+    let index = 0;
+
+    function updateCarousel() {
+      carrusel.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    nextBtn.addEventListener("click", () => {
+      index = (index + 1) % totalItems; // bucle infinito
+      updateCarousel();
     });
+
+    prevBtn.addEventListener("click", () => {
+      index = (index - 1 + totalItems) % totalItems; // bucle infinito
+      updateCarousel();
+    });
+
+    updateCarousel();
+    /*Descarga de la imagen*/
+    const downloadBtn = document.querySelector(".carrusel-btn.download");
+    const items = document.querySelectorAll(".carrusel-item img"); // todas las imágenes del carrusel
+
+    downloadBtn.addEventListener("click", () => {
+      const img = items[index]; // imagen actual
+      const link = document.createElement("a");
+      link.href = img.src;
+    
+      // Nombre de archivo opcional: mantiene el nombre original
+      const nombre = img.src.split("/").pop();
+      link.download = nombre;
+    
+      // Simula click para descargar
+      link.click();
+    });
+
     /*Copos de nieve*/
     const snowCount = 250; // cantidad total deseada
     let created = 0;
@@ -193,10 +181,8 @@
       snowflake.style.left = Math.random() * 100 + "vw";
       snowflake.style.fontSize = (Math.random() * 20 + 20) + "px";
       snowflake.style.animationDuration = (Math.random() * 5 + 5) + "s";
-      snowflake.style.animationDelay = "-" + Math.random() * 5 + "s"; // empieza ya
       snowContainer.appendChild(snowflake);
     };
-
 
     const snowInterval = setInterval(() => {
       createSnowflake();
