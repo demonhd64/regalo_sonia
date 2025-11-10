@@ -15,8 +15,10 @@
       background-color: #f2f2f2;
       /*Cambiar el background general por uno bonito con animación, pensar cual*/
     }
+
     #folder{
-        width: 500px;
+        width: 100%;
+        min-width: 500px;
         height: 250px;
         background-color: #4b4b4b;
         display: flex;
@@ -27,13 +29,18 @@
         transition: opacity 1s ease;
         cursor: pointer;
     }
+    @media (max-width: 400px){
+        #folder{
+            min-width: 350px;
+        }
+    }
     #folder.after{
         opacity: 1;
     }
     #folderTriangle{
         position: absolute;
         top: 0;
-        width: 500px;
+        width: 100%;
         height: 100px;
         background:
             -webkit-radial-gradient(white 10%, transparent 15.1%),
@@ -49,7 +56,7 @@
         opacity: 0;
     }
     #folderTriangleOpen{
-        width: 500px;
+        width: 100%;
         height: 100px;
         background:
             -webkit-radial-gradient(white 10%, transparent 15.1%),
@@ -65,7 +72,7 @@
     }
     #open{
         color: white;
-        font-size: larger;
+        font-size: clamp(0.5rem, 1rem, 1rem);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         opacity: 1;
         transition: opacity 1s ease;
@@ -77,14 +84,19 @@
         top: 0;
         left: 0;
         position: absolute;
+        width: 100%;      
+        height: 100%;         
+        display: flex;          
+        align-items: top center;  
+        justify-content: center;
         color: white;
-        font-size: larger;
+        font-size: clamp(0.5rem, 1rem, 1rem);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         opacity: 0;
         transition: opacity 1s ease;
         word-break: keep-all;
-        line-break: anywhere;
     }
+
     #text.after{
         opacity: 1;
     }
@@ -101,7 +113,11 @@
     <div id="message">
         <div id="folderTriangleOpen"></div>
         <div id="folder" class="after">
-            <p id="text">Muchisimas felilcidades</p>
+            <p id="text">Muchisimas felilcidades ¡Muchísimas felicidades en este día tan especial!<br>
+                        Que cada momento esté lleno de alegría, risas y sorpresas inolvidables. <br>
+                        Que todos tus sueños y metas se cumplan, y que sigas creciendo y brillando como hasta ahora. <br>
+                        Disfruta de cada instante, rodeado de las personas que más quieres, y recuerda siempre celebrar tus logros, grandes y pequeños. <br>
+                        ¡Que la felicidad te acompañe hoy y siempre! </p>
             <div id="folderTriangle"></div>
             <div id="open"><p>Clicame para abrirme</p></div>
         </div>
