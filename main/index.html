@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./img/index.png" type="image/x-icon">
   <title>Regalo rubia</title>
   <style>
     body {
@@ -119,7 +120,7 @@
 
     #text {
       text-align: center;
-      font-family: sans-serif;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;    
     }
 
     #btns {
@@ -203,7 +204,7 @@
     #open{
         color: white;
         font-size: clamp(0.5rem, 1rem, 1rem);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Courier New', Courier, monospace;
         opacity: 1;
         transition: opacity 1s ease;
     }
@@ -230,18 +231,35 @@
     #folder_text.after{
         opacity: 1;
     }
+    #Carrusel{
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 10;
+        padding: 10px;
+        border-radius: 10px;
+        border: 2px solid black;
+        background-color: rgb(255, 52, 255);
+        font-family: 'Lucidatypewriter';
+        font-size: medium;
+        opacity: 0;
+        transition: opacity 1s ease;
+    }
+    #Carrusel.after{
+      opacity: 1;
+      cursor: pointer;
+    }
+    /*Carrusel de imagenes*/
 
   </style>
 </head>
-
-
-<div id="snow-container"></div>
-
-
-
-
-
 <body>
+
+  <div id="snow-container"></div>
+
+
+  <button id="Carrusel">Imagenes</button>
+
   <div id="start">
     <div class="regalo">
         <div class="tapa">
@@ -276,7 +294,9 @@
     </div>
   </div>
 
+  <div id="CarruselImages">
 
+  </div>
 
 
   
@@ -297,6 +317,7 @@
     const control = false; //Si está abierto (true) o no (false)
     const textFolder = document.getElementById("open"); 
     const text = document.getElementById("folder_text");
+    const images = document.getElementById("Carrusel");
     folder.addEventListener('click', () => {
         if(getComputedStyle(folder).opacity == "1"){
             if(control == false){
@@ -304,6 +325,7 @@
                 Triangles[1].classList.add("afterOpen");
                 folder.style.cursor="auto";
                 textFolder.classList.add("after");
+                images.classList.add("after");
                 setTimeout(() => {
                     text.classList.add("after");
                 }, 1000);
