@@ -231,7 +231,7 @@
     #folder_text.after{
         opacity: 1;
     }
-    #Carrusel{
+    #Carrusel, #CarruselExit{
         position: fixed;
         top: 10px;
         right: 10px;
@@ -245,12 +245,75 @@
         opacity: 0;
         transition: opacity 1s ease;
     }
-    #Carrusel.after{
+    #CarruselExit{
+        pointer-events: none;
+    }
+    #Carrusel.after, #CarruselExit.after{
       opacity: 1;
       cursor: pointer;
+      pointer-events: auto;
     }
     /*Carrusel de imagenes*/
+    #carrusel-container {
+      position: absolute;
+      width: 600px;      /* ancho del carrusel */
+      height: auto;     /* alto del carrusel */
+      overflow: hidden;  /* oculta las demás imágenes */
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+    #carrusel-container.after{
+      opacity: 1;
+      pointer-events: auto;
+    }
 
+    #carrusel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      height: 100%;
+    }
+
+    .carrusel-item {
+      min-width: 100%;   /* ocupa todo el ancho del contenedor */
+      height: 100%;
+    }
+
+    .carrusel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* la imagen cubre el contenedor sin deformarse */
+      display: block;
+    }
+
+    /* Botones */
+    .carrusel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      border-radius: 5px;
+      z-index: 10;
+      user-select: none;
+    }
+
+    .carrusel-btn-prev {
+      left: 10px;
+    }
+
+    .carrusel-btn-next {
+      right: 10px;
+    }
+
+    .download{
+      top: 50px;
+      left: 20px;
+    }
   </style>
 </head>
 <body>
@@ -259,6 +322,7 @@
 
 
   <button id="Carrusel">Imagenes</button>
+  <button id="CarruselExit">Exit</button>
 
   <div id="start">
     <div class="regalo">
@@ -294,8 +358,28 @@
     </div>
   </div>
 
-  <div id="CarruselImages">
+<div id="snow-container"></div>
 
+
+  <div id="carrusel-container">
+    <div id="carrusel">
+      <div class="carrusel-item"><img src="./img/2.png" alt="Foto 2"></div>
+      <div class="carrusel-item"><img src="./img/3.png" alt="Foto 3"></div>
+      <div class="carrusel-item"><img src="./img/5.jpg" alt="Foto 5"></div>
+      <div class="carrusel-item"><img src="./img/6.jpg" alt="Foto 6"></div>
+      <div class="carrusel-item"><img src="./img/7.jpg" alt="Foto 7"></div>
+      <div class="carrusel-item"><img src="./img/8.jpg" alt="Foto 8"></div>
+      <div class="carrusel-item"><img src="./img/9.jpg" alt="Foto 9"></div>
+      <div class="carrusel-item"><img src="./img/10.jpg" alt="Foto 10"></div>
+      <div class="carrusel-item"><img src="./img/11.jpg" alt="Foto 11"></div>
+      <div class="carrusel-item"><img src="./img/12.jpg" alt="Foto 12"></div>
+      <div class="carrusel-item"><img src="./img/13.jpg" alt="Foto 13"></div>
+      <div class="carrusel-item"><img src="./img/14.jpg" alt="Foto 14"></div>
+      
+    </div>
+    <button class="carrusel-btn carrusel-btn-prev">←</button>
+    <button class="carrusel-btn carrusel-btn-next">→</button>
+    <button class="carrusel-btn download">↓</button>
   </div>
 
 
@@ -353,6 +437,62 @@
       created++;
       if (created >= snowCount) clearInterval(snowInterval);
     }, 80); // crea un copo cada 80 ms aprox.
+
+    //Aparecer carrusel:
+    const carruselBtn = document.getElementById("Carrusel");
+    const carruselExitBtn = document.getElementById("CarruselExit");
+    const carruselContainer = document.getElementById("carrusel-container");
+    carruselBtn.addEventListener("click", () => {
+        carruselContainer.classList.add("after");
+        carruselBtn.classList.remove("after");
+        carruselExitBtn.classList.add("after");
+    });
+    carruselExitBtn.addEventListener("click", () => {
+        carruselContainer.classList.remove("after");
+        carruselBtn.classList.add("after");
+        carruselExitBtn.classList.remove("after");
+
+    });
+    /*Carrusel*/
+    const carrusel = document.getElementById("carrusel");
+    const prevBtn = document.querySelector(".carrusel-btn-prev");
+    const nextBtn = document.querySelector(".carrusel-btn-next");
+    const totalItems = document.querySelectorAll(".carrusel-item").length;
+
+    let index = 0;
+
+    function updateCarousel() {
+      carrusel.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    nextBtn.addEventListener("click", () => {
+      index = (index + 1) % totalItems; // bucle infinito
+      updateCarousel();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      index = (index - 1 + totalItems) % totalItems; // bucle infinito
+      updateCarousel();
+    });
+
+    updateCarousel();
+    /*Descarga de la imagen*/
+    const downloadBtn = document.querySelector(".carrusel-btn.download");
+    const items = document.querySelectorAll(".carrusel-item img"); // todas las imágenes del carrusel
+
+    downloadBtn.addEventListener("click", () => {
+      const img = items[index]; // imagen actual
+      const link = document.createElement("a");
+      link.href = img.src;
+    
+      // Nombre de archivo opcional: mantiene el nombre original
+      const nombre = img.src.split("/").pop();
+      link.download = nombre;
+    
+      // Simula click para descargar
+      link.click();
+    });
+
   </script>
 </body>
 </html>
