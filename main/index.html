@@ -16,20 +16,21 @@
       background-color: #c5f6fa;
       overflow: hidden;
     }
-    /*Copos de nieve*/
+
+    /* Copos de nieve */
     #snow-container {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none; /* no bloquea clicks */
-      z-index: -1; /* detrás de todo */
-      overflow: hidden;   /* nada se sale del contenedor */
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
     }
 
     .snowflake {
-        z-index: -1;
+      z-index: -1;
       position: absolute;
       top: -10px;
       color: rgb(37, 200, 255);
@@ -37,17 +38,13 @@
       animation: fall linear infinite;
       opacity: 1;
     }
+
     @keyframes fall {
-        0% {
-          transform: translateY(0) rotate(0deg);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(100vh) rotate(360deg);
-          opacity: 0.3;
-        }
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0.3; }
     }
 
+    /* Start */
     #start {
       position: absolute;
       display: flex;
@@ -57,26 +54,19 @@
       gap: 15px;
       transition: all 0.5s ease;
     }
-    #start.after{
-        opacity: 0;
-    }
-    
-    .regalo {
-      width: 400px; 
-    }
+    #start.after { opacity: 0; }
+
+    .regalo { width: 400px; }
     .caja, .tapa {
       background:
         -webkit-radial-gradient(white 10%, transparent 15.1%),
         -webkit-radial-gradient(white 7%, transparent 15.1%),
-      #f80000;
+        #f80000;
       background-position: 0 0, 25px 25px;
       background-size: 50px 50px;
       position: relative;
     }
-    .caja {
-      width: 100%;
-      height: 250px;
-    }
+    .caja { width: 100%; height: 250px; }
     .tapa {
       width: 100%;
       height: 70px;
@@ -90,32 +80,15 @@
       background: rgba(239, 184, 16, 0.8);
       box-shadow: 1px 2px 3px rgba(0,0,0,0.1);
     }
-    .caja span:first-child {
-      width: 100%;
-      height: 60px;
-      top: 80px;
-    }
-    .caja span:last-child, .tapa span {
-      width: 60px;
-      height: 100%;
-      left: 170px;
-    }
-    .tapa span {
-      left: 170px;
-    }
+    .caja span:first-child { width: 100%; height: 60px; top: 80px; }
+    .caja span:last-child, .tapa span { width: 60px; height: 100%; left: 170px; }
+    .tapa span { left: 170px; }
+
     @media (max-width: 400px){
-      .regalo{
-        width: 350px;
-      }
-      .caja span:first-child {
-        top: 80px;
-      }
-      .caja span:last-child, .tapa span {
-        left: 150px;
-      }
-      .tapa span {
-        left: 150px;
-      }
+      .regalo { width: 350px; }
+      .caja span:first-child { top: 80px; }
+      .caja span:last-child, .tapa span { left: 150px; }
+      .tapa span { left: 150px; }
     }
 
     #text {
@@ -146,151 +119,133 @@
       color: white;
     }
 
-    /*Estilos del texto despues del start*/
-      #folder{
-        width: 100%;
-        min-width: 500px;
-        height: 250px;
-        background-color: #4b4b4b;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        opacity: 0;
-        transition: opacity 1s ease;
+    /* Folder */
+    #folder{
+      width: 100%;
+      min-width: 500px;
+      height: 250px;
+      background-color: #4b4b4b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      opacity: 0;
+      transition: opacity 1s ease;
     }
-    @media (max-width: 400px){
-        #folder{
-            min-width: 350px;
-        }
-    }
-    #folder.after{
-        opacity: 1;
-        cursor: pointer;
-    }
+    @media (max-width: 400px){ #folder{ min-width: 350px; } }
+    #folder.after{ opacity: 1; cursor: pointer; }
+
     #folderTriangle{
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 100px;
-        background:
-            -webkit-radial-gradient(white 10%, transparent 15.1%),
-            -webkit-radial-gradient(white 7%, transparent 15.1%),
-            rgb(59, 163, 156);
-        background-position:0 0, 10px 10px;
-        background-size: 20px 20px;
-        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
-        opacity: 1;
-        transition: opacity 0.5s ease;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100px;
+      background:
+        -webkit-radial-gradient(white 10%, transparent 15.1%),
+        -webkit-radial-gradient(white 7%, transparent 15.1%),
+        rgb(59, 163, 156);
+      background-position:0 0, 10px 10px;
+      background-size: 20px 20px;
+      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+      opacity: 1;
+      transition: opacity 0.5s ease;
     }
-    #folderTriangle.after{
-        opacity: 0;
-    }
+    #folderTriangle.after{ opacity: 0; }
+
     #folderTriangleOpen{
-        width: 100%;
-        height: 100px;
-        background:
-            -webkit-radial-gradient(white 10%, transparent 15.1%),
-            -webkit-radial-gradient(white 7%, transparent 15.1%),
-            rgb(59, 163, 156);        background-position:0 0, 10px 10px;
-        background-size: 20px 20px;
-        clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
-        opacity: 0;
-        transition: opacity 0.5s ease;
+      width: 100%;
+      height: 100px;
+      background:
+        -webkit-radial-gradient(white 10%, transparent 15.1%),
+        -webkit-radial-gradient(white 7%, transparent 15.1%),
+        rgb(59, 163, 156);
+      background-position:0 0, 10px 10px;
+      background-size: 20px 20px;
+      clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
     }
-    #folderTriangleOpen.afterOpen{
-        opacity: 1;
-    }
+    #folderTriangleOpen.afterOpen{ opacity: 1; }
+
     #open{
-        color: white;
-        font-size: clamp(0.5rem, 1rem, 1rem);
-        font-family: 'Courier New', Courier, monospace;
-        opacity: 1;
-        transition: opacity 1s ease;
+      color: white;
+      font-size: clamp(0.5rem, 1rem, 1rem);
+      font-family: 'Courier New', Courier, monospace;
+      opacity: 1;
+      transition: opacity 1s ease;
     }
-    #open.after{
-        opacity: 0;
+    #open.after{ opacity: 0; }
+
+    /* Folder text container */
+    .folder_text_container{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;      
+      height: 100%;         
+      display: flex;          
+      flex-direction: column;   /* Apila los p verticalmente */
+      justify-content: center;  /* Centrado vertical */
+      align-items: center;      /* Centrado horizontal */
+      color: white;
+      font-size: clamp(0.5rem, 1rem, 1rem);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      opacity: 0;
+      transition: opacity 1s ease;
+      word-break: keep-all;
     }
-    #folder_text{
-        top: 0;
-        left: 0;
-        position: absolute;
-        width: 100%;      
-        height: 100%;         
-        display: flex;          
-        align-items: top center;  
-        justify-content: center;
-        color: white;
-        font-size: clamp(0.5rem, 1rem, 1rem);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        opacity: 0;
-        transition: opacity 1s ease;
-        word-break: keep-all;
+    .folder_text_container.after{ opacity: 1; }
+
+    .folder_text {
+      margin: 5px 0; /* Espaciado entre los párrafos */
     }
 
-    #folder_text.after{
-        opacity: 1;
-    }
+    /* Carrusel botones */
     #Carrusel, #CarruselExit{
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 10;
-        padding: 10px;
-        border-radius: 10px;
-        border: 2px solid black;
-        background-color: rgb(255, 52, 255);
-        font-family: 'Lucidatypewriter';
-        font-size: medium;
-        opacity: 0;
-        transition: opacity 1s ease;
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid black;
+      background-color: rgb(255, 52, 255);
+      font-family: 'Lucidatypewriter';
+      font-size: medium;
+      opacity: 0;
+      transition: opacity 1s ease;
     }
-    #CarruselExit{
-        pointer-events: none;
-    }
-    #Carrusel.after, #CarruselExit.after{
-      opacity: 1;
-      cursor: pointer;
-      pointer-events: auto;
-    }
-    /*Carrusel de imagenes*/
+    #CarruselExit{ pointer-events: none; }
+    #Carrusel.after, #CarruselExit.after{ opacity: 1; cursor: pointer; pointer-events: auto; }
+
+    /* Carrusel de imagenes */
     #carrusel-container {
       position: absolute;
-      width: 100%;      /* ancho del carrusel */
-      height: 1000px;     /* alto del carrusel */
-      overflow: hidden;  /* oculta las demás imágenes */
+      width: 100%;
+      height: 1000px;
+      overflow: hidden;
       opacity: 0;
       transition: opacity 0.5s ease;
       pointer-events: none;
       justify-content: center;
       align-items: center;
     }
-    #carrusel-container.after{
-      opacity: 1;
-      pointer-events: auto;
-    }
+    #carrusel-container.after{ opacity: 1; pointer-events: auto; }
 
-    #carrusel {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-      height: 100%;
-    }
+    #carrusel { display: flex; transition: transform 0.5s ease-in-out; height: 100%; }
 
-    .carrusel-item {
-      min-width: 100%;   /* ocupa todo el ancho del contenedor */
-      height: 100%;
-    }
+    .carrusel-item { min-width: 100%; height: 100%; }
 
     .carrusel-item img {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* la imagen cubre el contenedor sin deformarse */
+      object-fit: contain;
       object-position: center;
       display: block;
-      
     }
 
-    /* Botones */
+    /* Botones carrusel */
     .carrusel-btn {
       position: absolute;
       top: 50%;
@@ -305,40 +260,24 @@
       z-index: 10;
       user-select: none;
     }
+    .carrusel-btn-prev { left: 10px; }
+    .carrusel-btn-next { right: 10px; }
+    .download{ position: fixed; top: 50px; left: 20px; }
 
-    .carrusel-btn-prev {
-      left: 10px;
-    }
-
-    .carrusel-btn-next {
-      right: 10px;
-    }
-
-    .download{
-      position: fixed;
-      top: 50px;
-      left: 20px;
-    }
   </style>
 </head>
 <body>
 
   <div id="snow-container"></div>
 
-
   <button id="Carrusel">Imagenes</button>
   <button id="CarruselExit">Exit</button>
 
   <div id="start">
     <div class="regalo">
-        <div class="tapa">
-        <span></span>
+      <div class="tapa"><span></span></div>
+      <div class="caja"><span></span><span></span></div>
     </div>
-    <div class="caja">
-        <span></span>
-        <span></span>
-    </div>
-  </div>
 
     <div id="text">
       <p>¿Quieres abrir el regalo?</p>
@@ -353,18 +292,14 @@
   <div id="message">
     <div id="folderTriangleOpen"></div>
     <div id="folder">
-        <p id="folder_text">Muchisimas felilcidades ¡Muchísimas felicidades en este día tan especial!<br>
-                    Que cada momento esté lleno de alegría, risas y sorpresas inolvidables. <br>
-                    Que todos tus sueños y metas se cumplan, y que sigas creciendo y brillando como hasta ahora. <br>
-                    Disfruta de cada instante, rodeado de las personas que más quieres, y recuerda siempre celebrar tus logros, grandes y pequeños. <br>
-                    ¡Que la felicidad te acompañe hoy y siempre! </p>
-        <div id="folderTriangle"></div>
-        <div id="open"><p>Clicame para abrirme</p></div>
+      <div class="folder_text_container">
+        <p class="folder_text">¡Muchas Felicidades!</p>
+        <p class="folder_text">Hola</p>
+      </div>
+      <div id="folderTriangle"></div>
+      <div id="open"><p>Clicame para abrirme</p></div>
     </div>
   </div>
-
-<div id="snow-container"></div>
-
 
   <div id="carrusel-container">
     <div id="carrusel">
@@ -386,26 +321,25 @@
     <button class="carrusel-btn carrusel-btn-next">→</button>
   </div>
 
-
-  
   <script>
     const btns = document.querySelectorAll('#btns button');
     const folder = document.getElementById("folder");
+
     btns[0].addEventListener('click', () => {
       const start = document.getElementById('start');
       start.classList.add('after');
       folder.classList.add('after');
     });
-    btns[1].addEventListener('click', () => {
-      alert('¡Qué mala persona! ¡Adiós!');
-    });
 
-    /*Script regalo despes de start*/
+    btns[1].addEventListener('click', () => { close(); });
+
+    /* Script regalo */
     const Triangles = [document.getElementById("folderTriangle"),document.getElementById("folderTriangleOpen")];
-    const control = false; //Si está abierto (true) o no (false)
+    const control = false;
     const textFolder = document.getElementById("open"); 
-    const text = document.getElementById("folder_text");
+    const textItems = document.querySelectorAll(".folder_text_container");
     const images = document.getElementById("Carrusel");
+
     folder.addEventListener('click', () => {
         if(getComputedStyle(folder).opacity == "1"){
             if(control == false){
@@ -415,14 +349,14 @@
                 textFolder.classList.add("after");
                 images.classList.add("after");
                 setTimeout(() => {
-                    text.classList.add("after");
+                    textItems.forEach(text => text.classList.add("after"));
                 }, 1000);
             };
         };
     });
 
-    /*Copos de nieve*/
-    const snowCount = 250; // cantidad total deseada
+    /* Copos de nieve */
+    const snowCount = 250;
     let created = 0;
     const snowContainer = document.getElementById("snow-container");
 
@@ -440,12 +374,13 @@
       createSnowflake();
       created++;
       if (created >= snowCount) clearInterval(snowInterval);
-    }, 80); // crea un copo cada 80 ms aprox.
+    }, 80);
 
-    //Aparecer carrusel:
+    /* Carrusel */
     const carruselBtn = document.getElementById("Carrusel");
     const carruselExitBtn = document.getElementById("CarruselExit");
     const carruselContainer = document.getElementById("carrusel-container");
+
     carruselBtn.addEventListener("click", () => {
         carruselContainer.classList.add("after");
         carruselBtn.classList.remove("after");
@@ -453,6 +388,7 @@
         folder.classList.remove("after");
         Triangles[1].classList.remove("afterOpen");
     });
+
     carruselExitBtn.addEventListener("click", () => {
         carruselContainer.classList.remove("after");
         carruselBtn.classList.add("after");
@@ -460,43 +396,37 @@
         folder.classList.add("after");
         Triangles[1].classList.add("afterOpen");
     });
-    /*Carrusel*/
+
     const carrusel = document.getElementById("carrusel");
     const prevBtn = document.querySelector(".carrusel-btn-prev");
     const nextBtn = document.querySelector(".carrusel-btn-next");
     const totalItems = document.querySelectorAll(".carrusel-item").length;
-
     let index = 0;
 
-    function updateCarousel() {
-      carrusel.style.transform = `translateX(${-index * 100}%)`;
-    }
+    function updateCarousel() { carrusel.style.transform = `translateX(${-index * 100}%)`; }
 
     nextBtn.addEventListener("click", () => {
-      index = (index + 1) % totalItems; // bucle infinito
+      index = (index + 1) % totalItems;
       updateCarousel();
     });
 
     prevBtn.addEventListener("click", () => {
-      index = (index - 1 + totalItems) % totalItems; // bucle infinito
+      index = (index - 1 + totalItems) % totalItems;
       updateCarousel();
     });
 
     updateCarousel();
-    /*Descarga de la imagen*/
+
+    /* Descarga de la imagen */
     const downloadBtn = document.querySelector(".carrusel-btn.download");
-    const items = document.querySelectorAll(".carrusel-item img"); // todas las imágenes del carrusel
+    const items = document.querySelectorAll(".carrusel-item img");
 
     downloadBtn.addEventListener("click", () => {
-      const img = items[index]; // imagen actual
+      const img = items[index];
       const link = document.createElement("a");
       link.href = img.src;
-    
-      // Nombre de archivo opcional: mantiene el nombre original
       const nombre = img.src.split("/").pop();
       link.download = nombre;
-    
-      // Simula click para descargar
       link.click();
     });
 
