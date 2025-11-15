@@ -189,7 +189,7 @@
       justify-content: center;  /* Centrado vertical */
       align-items: center;      /* Centrado horizontal */
       color: white;
-      font-size: clamp(0.5rem, 1rem, 1rem);
+      font-size: clamp(0.6rem, 2vw, 0.9rem);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       opacity: 0;
       transition: opacity 1s ease;
@@ -285,7 +285,7 @@
 
     <div id="btns">
       <button>¡Siiiiii!</button>
-      <button>No, vete a la mierda</button>
+      <button>NOPE</button>
     </div>
   </div>
 
@@ -293,8 +293,13 @@
     <div id="folderTriangleOpen"></div>
     <div id="folder">
       <div class="folder_text_container">
-        <p class="folder_text">¡Muchas Felicidades!</p>
-        <p class="folder_text">Hola</p>
+        <p class="folder_text">¡Muchas Felicidades Sonia!</p>
+        <p class="folder_text">Se que no hablamos, pero queria tener un ultimo pequeño detalle.</p>
+        <p class="folder_text" style="font-size: clamp(0.6rem, 2vw, 0.85rem);">Espero que te lo pases muy bien hoy, o te lo hayas pasado muy bien este finde.</p>
+        <p class="folder_text">Ya 19 añitos, dentro de poco entras en los 20 y pierdes la adolescencia.</p>
+        <p class="folder_text">Bueno... espero que te lo pases bien y disfrutes tus 19.</p>
+        <p class="folder_text">¡Muchas felicidades!</p>
+        <p class="folder_text">PD: Hay una sección de imagenes la cual es un pequeño recopilatorio de fotos tuyas, las puedes descargar si le das a la flecha de arriba a la izquierda.</p>
       </div>
       <div id="folderTriangle"></div>
       <div id="open"><p>Clicame para abrirme</p></div>
@@ -331,7 +336,7 @@
       folder.classList.add('after');
     });
 
-    btns[1].addEventListener('click', () => { close(); });
+    btns[1].addEventListener('click', () => { alert("Se va ha cerrar, como no lo quieres");close(); });
 
     /* Script regalo */
     const Triangles = [document.getElementById("folderTriangle"),document.getElementById("folderTriangleOpen")];
